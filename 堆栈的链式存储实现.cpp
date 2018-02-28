@@ -1,57 +1,59 @@
 # include<stdio.h>
 # include<stdlib.h>
 
-typedef struct Node{
-	ElementType Data;
-	struct Node *Next;
+typedef struct node{
+	int a;
+	struct node *Next;
 }LinkStack;
 
-LinkStack *CreateStack();
+LinkStack *create();
 
-int IsEmpty(LinkStack *S);
+void push(int b,LinkStack *s);
 
-void Push(ElementType item,LinkStack *S);
+int pop(LinkStack *s);
 
-ElementType Pop(LinkStacck *S);
+int isEmpty(LinkStack *s);
 
 int main()
 {
-	LinkStack *Top;
- }
- 
-LinkStack *CreateStack()
-{ /*构建一个堆栈的头结点,返回指针*/
-	LinkStack *S=(LinkStack*)malloc(sizeof(struct Node));
-	S->Next =NULL;
-	return S;
- } 
- 
-int IsEmpty(LinkStack *S)
-{ /*判断堆栈s是否为空,若为空函数返回整数1,否则返回0*/
-	return (S->Next ==NULL);
+	return 0;
 }
 
-void Push(ElementType item,LinkStack *S)
-{ /*将元素item压入s*/
-	struct Node *TmpCell;
-	TmpCell =malloc(sizeof(struct Node));
-	TmpCell->Data =item;
-	TmpCell->Next =S->Next ;
-	S->Next =TmpCell;
+LinkStack *create()
+{
+	LinkStack *s=(LinkStack*)malloc(sizeof(LinkStack));
+	s->Next =NULL;
+	return s;
 }
 
-ElementType Pop(LinkStack *S)
-{ /*删除并返回堆栈s的栈顶元素*/
-	struct Node *FirstCell;
-	ElementType TopElem;
-	if (IsEmpty(S)){
-		printf("堆栈空");
-		return NULL;
-	} else{
-		FirstCell=S->Next ;
-		S->Next =FirstCell->Next;
-		TopElem=FirstCell->Data ;
-		free(FirstCell);
-		return TopElem;
+int isEmpty(LinkStack *s)
+{  /*判断是否为空函数,空函数返回1,否则返回0*/
+	return (s->Next==NULL);
+}
+
+void push(int b,LinkStack *s)
+{
+	LinkStack *nextElement=(LinkStack *)malloc(sizeof(LinkStack));
+	nextElement->a =b;
+	nextElement->Next =s->Next ;
+	s->Next =nextElement;
+	return ;
+}
+
+int pop(LinkStack *s)
+{
+	LinkStack *b;
+	int Data;
+	if(isEmpty(s)){
+		printf("函数为空");
+		return NULL; 
+	}else{
+		b=s->Next ;
+		s->Next =b->Next ;
+		Data=b->a ; 
+		free(b);
+		return Data;
 	}
+	
 }
+

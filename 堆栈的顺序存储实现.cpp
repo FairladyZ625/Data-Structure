@@ -55,7 +55,7 @@ ElementType PopD(struct DStack *PtrS,int Tag)
 			printf("¶ÑÕ»1¿Õ"); 
 			return NULL; 
 		}else{
-			return PtrS->Data [(PtrS->Top1 )--]''
+			return PtrS->Data [(PtrS->Top1 )--];
 		}else{
 			if (PtrS->Top2 ==MaxSize){ /*¶ÑÕ»2¿Õ*/
 				printf("¶ÑÕ»2¿Õ");

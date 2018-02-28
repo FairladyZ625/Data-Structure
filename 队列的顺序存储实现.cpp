@@ -1,41 +1,72 @@
 # include<stdio.h>
 # include<stdlib.h>
 
-# define MaxSize </*存储数据元素的最大个数*/>
+#define MaxSize 100
 
 typedef struct{
-	ElementType Data[Maxsize];
+	int Data[MaxSize];
 	int rear;
 	int front;
 }Queue;
 
-void AddQ(Queue *PtrQ,ElementType item);
+Queue CreateQueue(int Max);
 
-ElementType DeleteQ(Queue *PtrQ);
+int isFull(Queue *Q,int Max);
+
+void AddQ(Queue *Q,int item);
+
+int isEmpty(Queue Q);
+
+int DeleteQ(Queue *Q);
 
 int main()
 {
 	return 0;
 }
 
-void AddQ(Queue *PtrQ,ElementType item)
+Queue CreateQueue()
 {
-	if ((PtrQ->rear +1)%MaxSize ==PtrQ->front ){
-		printf("队列满");
-		return;
+	Queue list;
+	list.front=-1;
+	list.rear=0;
+	return list;   
+}
+
+int isFull(Queue *Q,int Max)
+{
+	if(Q->rear ==(Max-1)){
+		return 1;
 	}else{
-	PtrQ->rear = (PtrQ->rear +1) % Maxsize;
-	PtrQ->Data [PtrQ->rear]=item;
+		return 0;
 	}
 }
 
-ElementType DeleteQ(Queue *PtrQ)
+int isEmpty(Queue *Q)
 {
-	if (PtrQ->front ==PtrQ->rear ){
+	if(Q->front ==Q->rear  ){
+		return 1;
+	}else{
+		return 0;
+	}	
+}
+
+void AddQ(Queue *Q,int item)
+{
+	if(isFull(Q,MaxSize)){
+		printf("队列满");
+		return;
+	}else{
+		Q->Data[++(Q->rear)]=item;  
+	}
+}
+int DeleteQ(Queue *Q)
+{
+	int retData;
+	if(isEmpty(Q)){
 		printf("队列空");
-		return ERROR;
-	}else {
-		PtrQ->front = (PtrQ->front +1) %Maxsize;
-		return PtrQ->Data [PtrQ->front ]
+		return NULL;
+	}else{
+		retData=Q->Data[++(Q->front)];
+		return retData; 
 	}
 }
