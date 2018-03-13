@@ -1,99 +1,112 @@
 # include<stdio.h>
 # include<stdlib.h>
 
-typedef struct _list{
-	ElementType Data;
-	struct _list *Next;
+typedef struct node{
+	int num;
+	node *Next;
 }List;
 
-int Length(List *Ptrl);
+int length(List *ptrl);
 
-List *FindKth(int K,List *PtrL);
+List *FindSerNum(List *list,int k);
 
-List *Find(ElementTypeX,List *PtrL);
+List *FindNum(List *list,int k);
 
-List *Insert(ElementType X,int i,List *PtrL);
+List *insert(List *list,int i,int Num);
 
-List *Delete(int i,List *PtrL);
+List *Delete(List *list,int i);
 
 int main()
 {
-	List L,*Ptrl;
- }
- 
-int Length(List *Ptrl)
+	List *Myser;
+	Myser->Next =insert(Myser,1,3);
+	List *s=Myser->Next;
+	printf("%d",s->num );
+	return 0;
+}
+
+int length(List *ptrl)
 {
-	List *p=Ptrl;
-	int j=0;
-	while (p){
-		p=p->Next;
-		j++;   
+	int i=0;
+	while(ptrl){
+		ptrl=ptrl->Next;
+		i++; 
 	}
-	return j;
-  }  
-  
-List *FindKth(int K,List *PtrL)
+	return i;
+}
+
+List *FindSerNum(List *list,int k)
 {
-	List *p=PtrL;
 	int i=1;
-	while(p!=NULL && i<K){
-		p=p->next;
+	while(list&&i<k){
+		list=list->Next;
 		i++;
 	}
-	if (i==k) return p;
-	else return NULL;
+	if(i=k){
+		return list;
+	}else{
+		return NULL;
+	}	
 }
 
-List *Find(ElementType X,List *PtrL)
+List *FindNum(List *list, int k)
 {
-	List *p=PtrL;
-	while (p!= NULL&&p->Data !=x){
-		p=p->Next; 
+	while(list&&list->num !=k){
+		list=list->Next ;
 	}
-	return p;
+	if(list->num ==k){
+		return list;
+	}else{
+		return NULL;
+	}
 }
 
-List *Insert(ElementType X,int i,List *PtrL)
+List *insert(List*list,int i,int Num)
 {
-	List *p,*s;
 	if (i==1){
-		s=(List*)malloc(sizeof(List));
-		s->Data =X;
-		s->Next =PtrL;
+		List *s=(List*)malloc(sizeof(List));
+		s->num =Num; 
+		s->Next=list;
 		return s; 
 	}
-	p=FindKth(i-1,PtrL);
-	if (p==NULL){
-		printf("参数i错误");
+	List *p;
+	p=FindSerNum(list,i-1);
+	if(p=NULL){
+		printf("参数错");
+		return NULL; 
+	}else{
+		List *c=(List*)malloc(sizeof(List));
+		c->num =Num;
+		c->Next =p->Next ;
+		p->Next =c;
+		return list;
+	}
+}
+
+List *Delete(List *list,int i)
+{
+	if(i==1){
+		List *s=list;
+		if(list!=NULL){
+			list=list->Next;
+		}else{
+			return NULL;
+		}
+		free(s);
+		return list;
+	}
+	List *p=FindSerNum(list,i-1);
+	if(p==NULL){
+		printf("%d结点不存在",i-1);
+		return NULL;
+	}else if(p->Next ==NULL){
+		printf("%d结点不存在",i);
 		return NULL;
 	}else{
-		s=(List*)malloc(sizeof(List));
-		s->Data =X;
-		s->Next =p->Next ;
-		p->Next =s;
-		return PtrL;
+		List *c=(List*)malloc(sizeof(List));
+		c=p->Next;
+		p->Next =c->Next;
+		free(c);
+		return list;  
 	}
- }
- 
- List *Delete(int i,List *PtrL)
- {
- 	List *p,*s;
- 	if (i==1){
- 		s=PtrL;
- 		if (PtrL!= NULL) PtrL=PtrL->Next ;
- 		else return NULL;
- 		free(s);
- 		return PtrL;
-	 }
-	 p=FindKth(i-1,PtrL);
-	 if (p==NULL){
-	 	printf("第%d个结点不存在",i-1); return NULL;
-	 }else if(p->Next =NULL){
-	 	printf("第%d个结点不存在",i); return NULL;
-	 }else{
-	 	s=p->Next ;
-	 	p->Next =s->Next ;
-	 	free(s);
-	 	return PtrL;
-	 }
- }
+ } 
