@@ -28,24 +28,28 @@ int main()
 
 List Merge( List L1,List L2)
 {
+	List r;
 	List L=(List)malloc(sizeof(List));
-	List p=L;
-	while(L1&&L2){
-		if(L1->Data <L2->Data ){
-			p->Next =L1;
-			L1=L1->Next; 
-			p=p->Next;    
+	r=L;
+	List p=L1->Next;
+	List q=L2->Next; 
+	while(p&&q){
+		if(p->Data <q->Data ){
+			r->Next =p;
+			p=p->Next; 
+			r=r->Next;    
 		}else{
-			p->Next=L2; 
-			L2=L2->Next;
-			p=p->Next;  
+			r->Next=q; 
+			q=q->Next;
+			r=r->Next;  
 		}
 	}
-	if(L1 != NULL){
-		p->Next =L1;
-	}else if(L2!=NULL){
-		p->Next =L2;
+	if(p != NULL){
+		r->Next =p;
+	}else if(q!=NULL){
+		r->Next =q;
 	}
-	p->Next =NULL;
+	L1->Next =NULL;
+	L2->Next =NULL;
 	return L;
 }
