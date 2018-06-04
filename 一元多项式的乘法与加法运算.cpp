@@ -4,7 +4,7 @@
 typedef struct _node{
 	int num;
 	int index;
-	_node *next;
+	struct _node *next;
 }Poly; 
 
 Poly* ReadPoly();
@@ -84,7 +84,7 @@ int main()
 		 	c->num =t2->num ;
 		 	rear->next =c;
 		 	rear=c;
-		 }
+		 } 
 	 }
 	 if(t1){
 		Poly *d=(Poly*)malloc(sizeof(Poly));
